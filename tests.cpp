@@ -38,12 +38,13 @@ TEST_CASE("vector push_back, int") {
     REQUIRE(v1.empty() == false);
 }
 
+//я изменил знак в 46 строке: "==" -> ">="
 TEST_CASE("vector push_back, float") {
 
     MyVector<float> v1;
     v1.push_back(888.8);
     REQUIRE(v1.size() == 1);
-    REQUIRE(v1.capacity() == 1);
+    REQUIRE(v1.capacity() >= 1);
     REQUIRE(v1.empty() == false);
 
     v1.push_back(999.9);
@@ -233,7 +234,7 @@ TEST_CASE("vector resize, int") {
 
     MyVector<int> v1;
     v1.resize(9);
-    REQUIRE(v1.size() == 0);
+    REQUIRE(v1.size() == 9);
     REQUIRE(v1.capacity() >= 9);
     for (size_t i = 0; i < 9; ++i) {
         REQUIRE(v1[i] == 0);
@@ -247,24 +248,24 @@ TEST_CASE("vector resize, int") {
     v1.resize(9);
     REQUIRE(v1.size() == 9);
     REQUIRE(v1.capacity() >= 9);
-    REQUIRE(v1[6] == 0);
+    REQUIRE(v1[6] == 1);
 
     v1.resize(5);
     REQUIRE(v1.size() == 5);
     REQUIRE(v1.capacity() >= 5);
-    REQUIRE(v1[4] == 0);
+    REQUIRE(v1[4] == 1);
 }
 
 TEST_CASE("vector shrink_to_fit, int") {
 
     MyVector<int> v1;
     v1.resize(16);
-    REQUIRE(v1.size() == 0);
-    REQUIRE(v1.capacity() >= 0);
+    REQUIRE(v1.size() == 16);
+    REQUIRE(v1.capacity() >= 16);
 
     v1.shrink_to_fit();
-    REQUIRE(v1.size() == 0);
-    REQUIRE(v1.size() == 0);
+    REQUIRE(v1.size() == 16);
+    REQUIRE(v1.size() == 16);
 
     v1.assign(10, 8);
     REQUIRE(v1.size() == 10);
